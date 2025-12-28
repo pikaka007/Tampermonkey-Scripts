@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2.0
 // @description  牛客 Monaco 编辑器自动填充代码模板
-// @author pikaka
+// @author       pikaka
 // @match        https://www.nowcoder.com/practice/*
 // @run-at       document-idle
 // @grant        none
