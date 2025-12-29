@@ -169,9 +169,18 @@ for line in sys.stdin:
             shiftKey: false,
             metaKey: false
         });
-
+        
+        const data = new DataTransfer();
+        data.setData('text/plain', text);
+        
         // 创建 paste 事件
-         for (let i = 0; i < LEN; i += 1) {
+        const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData: data,
+            bubbles: true,
+            cancelable: true
+        });
+
+        for (let i = 0; i < LEN; i += 1) {
             node.dispatchEvent(rightDownEvent);
             node.dispatchEvent(rightUpEvent);
         }
@@ -179,16 +188,6 @@ for line in sys.stdin:
             node.dispatchEvent(deleteDownEvent);
             node.dispatchEvent(deleteUpEvent);
         }
-
-        const data = new DataTransfer();
-        data.setData('text/plain', text);
-
-        const pasteEvent = new ClipboardEvent('paste', {
-            clipboardData: data,
-            bubbles: true,
-            cancelable: true
-        });
-
         node.dispatchEvent(pasteEvent);
     }
 
@@ -211,7 +210,6 @@ for line in sys.stdin:
             clearInterval(timer);
             return;
         }
-        console.log("here")
 
         pasteText(editorNode, template);
         clearInterval(timer);
